@@ -6,3 +6,5 @@ platforms/
 plugins/
 *.log
 /www/lib/
+
+!platforms/android/AndroidManifest.xml
