@@ -1,7 +1,7 @@
 {
-  "name": "pickyourda-ra",
+  "name": "pickyourday-ra",
   "version": "1.1.1",
-  "description": "pickyourda-ra: An Ionic project",
+  "description": "pickyourday-ra: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
@@ -20,9 +20,11 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+	"cordova-plugin-crosswalk-webview",
+	"cordova-custom-config",
+	"cordova-plugin-camera",
+	"cordova-plugin-media-capture"
   ],
-  "cordovaPlatforms": [
-    "android"
-  ]
+  "cordovaPlatforms": []
 }
