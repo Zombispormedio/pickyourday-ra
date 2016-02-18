@@ -21,21 +21,38 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
-    <script src="js/utils.js"></script>
-    <script src="js/app.js"></script>
+  
 
     <script id="shader-vs" type="x-shader/x-vertex">
-        attribute vec2 a_position; varying vec2 uv; void main() { uv=0.5*vec2(1.0+a_position.x, 1.0+a_position.y); gl_Position =
-        vec4(a_position, 0, 1); }
+    
+        attribute vec2 a_position;
+        attribute vec2 a_texCoord; 
+        
+        uniform vec2 u_resolution;
+        
+        varying vec2 v_texCoord;
+  
+       void main(){
+       
+       vec2 zeroToOne= a_position/u_resolution;
+       
+       vec2 zeroToTwo=zeroToOne*2.0;
+       
+       vec2 clipSpace=zeroToTwo-1.0;
+       
+       gl_Position=vec4(clipSpace*vec2(1,-1), 0, 1);
+       
+       v_texCoord=a_texCoord;
+        }
     </script>
 
     <script id="shader-fs" type="x-shader/x-fragment">
         precision mediump float;
-         uniform sampler2D src;
-           varying vec2 uv;
+         uniform sampler2D u_image;
+           varying vec2 v_texCoord;
           void main(){ 
-        gl_FragColor = vec4(0, 1, 0, 1); 
-        // gl_FragColor=texture2D(src, uv); 
+  
+            gl_FragColor=texture2D(u_image, v_texCoord).bgra;
         }
 
     </script>
@@ -46,47 +63,17 @@
 
     <ion-pane>
         <ion-header-bar class="bar-stable">
-            <h1 class="title">Ionic Blank Starter</h1>
+            <h1 class="title">Pick Your Day Augmented Reality</h1>
         </ion-header-bar>
         <ion-content>
-            <canvas id="canvas"></canvas>
+            <canvas id="canvas" width="300", height="300"></canvas>
             <video id="video"></video>
         </ion-content>
     </ion-pane>
-    <script>
-        (function() {
-              var streaming = false, video= document.getElementById('video'), width = 320,
-      height = 0;
-               navigator.getMedia = ( navigator.getUserMedia ||
-                         navigator.webkitGetUserMedia ||
-                         navigator.mozGetUserMedia ||
-                         navigator.msGetUserMedia);
-                         
-                         navigator.getMedia({video: true,audio: false},
-                         function(stream) {
-                                if (navigator.mozGetUserMedia) {
-                                        video.mozSrcObject = stream;
-                                } else {
-                                         var vendorURL = window.URL || window.webkitURL;
-                                        video.src = vendorURL.createObjectURL(stream);
-                                    }
-                                 video.play();
-                            },
-                        function(err) {
-
-                             console.log("An error occured! " + err);
-                        });
-                        video.addEventListener('canplay', function(ev){
-                               if (!streaming) {
-                                height = video.videoHeight / (video.videoWidth/width);
-                                video.setAttribute('width', width);
-                                video.setAttribute('height', height);
-                                 initWebGl(video);
-                                streaming = true;
-                        }
-                        }, false);
-        })();
-    </script>
+      <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+     <script src="js/webgl.js"></script>
+    <script src="js/videostreaming.js"></script>
 </body>
 
 </html>

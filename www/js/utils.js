@@ -1,8 +1,7 @@
 function getGLContext(name){
 	    
 		var canvas = document.getElementById(name);
-        canvas.width  = window.innerWidth;
-canvas.height = window.innerHeight;
+    
         
 		var ctx = null;
 		
