@@ -1,19 +1,15 @@
 var videoStreaming;
 var gl;
-function initWebGl(video){
-    videoStreaming=video;
-    
-    var image=new Image();
-    image.src="img/default.jpg";
-    image.onload=function(){
-        render(image);
-    }
-    
-}
+var detector;
+var canvas_ar;
+var context_detector;
 
-function render(image){
+function initWebGl(video){
+       videoStreaming=video;
       var canvas = document.getElementById("canvas");
      gl = getGLContext("canvas");
+    
+    createDetector({width:canvas.width, height:canvas.height});
 
     var fragmentShader = getShader(gl, "shader-fs");
     var vertexShader = getShader(gl, "shader-vs");
@@ -52,10 +48,12 @@ function render(image){
   gl.enableVertexAttribArray(positionLocation);
   gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
       setRectangle(gl, 0, 0, canvas.width, canvas.height);
-    loadTexture(texture, image);
-     gl.drawArrays(gl.TRIANGLES, 0, 6);
+
     
      setInterval(function(){
+         context_detector.drawImage(videoStreaming, 0, 0);
+         canvas_ar.changed=true;
+          detector.detect( onMarkerCreated, onMarkerUpdated, onMarkerDestroyed );
           loadTexture(texture,  videoStreaming);
      gl.drawArrays(gl.TRIANGLES, 0, 6);
          
