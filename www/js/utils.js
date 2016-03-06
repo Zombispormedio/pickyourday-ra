@@ -27,6 +27,9 @@ function getGLContext(name){
 			return null;
 		}
 		else {
+            
+            ctx.viewportWidth = canvas.width;
+		ctx.viewportHeight = canvas.height;
 			return ctx;
 		}
 	}
@@ -59,8 +62,20 @@ function getGLContext(name){
         gl.compileShader(shader);
 
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            alert(gl.getShaderInfoLog(shader));
+           console.log(gl.getShaderInfoLog(shader));
             return null;
         }
         return shader;
     }
+
+
+window.requestAnimFrame = (function() {
+  return window.requestAnimationFrame ||
+         window.webkitRequestAnimationFrame ||
+         window.mozRequestAnimationFrame ||
+         window.oRequestAnimationFrame ||
+         window.msRequestAnimationFrame ||
+         function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+           window.setTimeout(callback, 1000/60);
+         };
+})();
