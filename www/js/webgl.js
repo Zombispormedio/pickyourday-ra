@@ -64,13 +64,14 @@ function draw(){
 
     gl.clear(gl.DEPTH_BUFFER_BIT);
 
-    detector.detect( function(marker){
+   /* detector.detect( function(marker){
         onMarkerCreated(marker)
         drawPicky();
     }, function(marker){
         onMarkerUpdated(marker)
         drawPicky();
-    }, onMarkerDestroyed );
+    }, onMarkerDestroyed );*/
+	drawPicky();
 
 
 
@@ -160,6 +161,7 @@ function drawPicky(){
     mat4.identity(mvMatrix);
     mat4.translate(mvMatrix, [0, 0.0, -7.0]);
     mat4.translate(mvMatrix, [0, 0.0, 0.0]);
+
 
     mvPushMatrix();
     mat4.rotate(mvMatrix, degToRad(rCube),[1,1,1]);
