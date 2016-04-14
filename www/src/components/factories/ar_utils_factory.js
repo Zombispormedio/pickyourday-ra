@@ -2,7 +2,7 @@ angular.module('ar-toolkit')
     .factory('ARUtils', function() {
 
     return {
-        fullPage:function(elem){
+        size:function(elem){
             elem.width=window.innerWidth;
             elem.height=window.innerHeight;
         }
