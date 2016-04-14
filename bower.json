@@ -1,11 +1,11 @@
 {
-  "name": "HelloIonic",
-  "private": "true",
-  "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.2.4"
-  },
-  "dependencies": {
-    "JSARToolKit": "kig/JSARToolKit",
-	"gl-matrix": "^1.2.4"
-  }
+    "name": "HelloIonic",
+    "private": "true",
+    "devDependencies": {
+        "ionic": "driftyco/ionic-bower#1.2.4"
+    },
+    "dependencies": {
+        "JSARToolKit": "kig/JSARToolKit",
+        "three.js": "^0.75.0"
+    }
 }

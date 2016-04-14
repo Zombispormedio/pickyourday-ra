@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"/>-->
         <title></title>
 
         <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
 
         <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
 <link href="css/ionic.app.css" rel="stylesheet">
@@ -20,80 +18,14 @@
         <!-- cordova script (this will be a 404 during development) -->
         <script src="cordova.js"></script>
 
-        <!-- your app's js -->
-
-
-        <script id="shader-vs" type="x-shader/x-vertex">
-            attribute vec2 a_video_position;
-            attribute vec2 a_texCoord; 
-
-            attribute vec3 a_position;
-
-            uniform vec2 u_resolution;
-            uniform bool u_video;
-
-            uniform mat4 uMVMatrix;
-            uniform mat4 uPMatrix;
-
-            varying vec2 v_texCoord;
-
-            void main(){
-
-
-                if(u_video){
-                    vec2 zeroToOne= a_video_position/u_resolution;
-                    vec2 zeroToTwo=zeroToOne*2.0;
-                    vec2 clipSpace=zeroToTwo-1.0;
-                    gl_Position=vec4(clipSpace*vec2(1,-1), 0, 1);
-                        v_texCoord=a_texCoord;
-                }else{
-
-                  gl_Position = uPMatrix * uMVMatrix *  vec4(a_position, 1.0);
-                }
-
-
-            }
-        </script>
-
-        <script id="shader-fs" type="x-shader/x-fragment">
-            precision mediump float;
-            uniform sampler2D u_image;
-            uniform bool u_video;
-            varying vec2 v_texCoord;
-
-
-            void main(){ 
-                if(u_video){
-                    gl_FragColor=texture2D(u_image, v_texCoord);
-                }else{
-                	gl_FragColor = vec4(0, 1, 0, 1);
-                }
-
-            }
-
-        </script>
-
-    </head>
-
-    <body ng-app="starter">
-
-        <ion-pane>
-            <ion-header-bar class="bar-stable">
-                <h1 class="title">Pick Your Day Augmented Reality</h1>
-            </ion-header-bar>
-            <ion-content>
-                <canvas id="canvas" width="300", height="300"></canvas>
-                <video id="video"></video>
-            </ion-content>
-        </ion-pane>
-        <script src="lib/gl-matrix/gl-matrix-min.js"></script>
-        <script src="data/picky.js"></script>
         <script src="lib/JSARToolKit/JSARToolKit.min.js"></script>
-        <script src="js/utils.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/ar.js"></script>
-        <script src="js/webgl.js"></script>
-        <script src="js/videostreaming.js"></script>
-    </body>
+        <script src="lib/three.js/three.min.js"></script>
+        <!-- your app's js -->
+        <script src="dist/pickyourday.min.js"></script>
+    </head>
+    <body ng-app="ar-toolkit">
 
+        <canvas ar-view></canvas>
+
+    </body>
 </html>
