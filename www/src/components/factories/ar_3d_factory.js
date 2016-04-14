@@ -42,7 +42,7 @@ angular.module('ar-toolkit')
         }
 
         return{
-            scen:scene,
+            scene:scene,
             camera:camera,
             add:add,
             remove:remove
@@ -60,10 +60,36 @@ angular.module('ar-toolkit')
 
         var reality= new Reality(sourceCanvas);
         var virtual= new Scene();
-        
-        var light=new THREE.SpotLight(0xffffff);
 
-        return {};
+        var light=new THREE.SpotLight(0xffffff);
+        light.position.set(0,0,9000);
+        light.lookAt(new THREE.Vector3(0,0,0));
+        virtual.scene.add(light);
+
+        function render(){
+            renderer.render(reality.scene, reality.camera);
+            renderer.render(virtual.scene, virtual.camera);
+        }
+
+        function update(){
+            reality.update();
+        }
+
+        function add(object){
+            virtual.add(object.model);
+        }
+
+        function remove(object){
+            virtual.remove(object.model);
+        }
+
+        return {
+            add: add,
+            remove: remove,
+            update: update,
+            render: render,
+            glCanvas: glCanvas
+        };
     }
 
     return {

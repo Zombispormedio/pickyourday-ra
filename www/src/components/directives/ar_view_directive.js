@@ -8,6 +8,7 @@ angular.module('ar-toolkit')
             
             ARCamera.wait(function(){
                 AR.init(elem);
+                AR.tick();
             });
             
             

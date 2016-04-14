@@ -11,14 +11,26 @@ angular.module('ar-toolkit')
 
         context=canvas.getContext("2d");
         
-        detector=ARDetector.create(canvas);
+        //detector=ARDetector.create(canvas);
         
         view=AR3D.create(glCanvas, cameraDimensions, canvas);
 
     }
+    
+    var tick=function(){
+        ARCamera.copyToContext(context);
+        canvas.changed=true;
+        
+        view.update();
+        view.render();
+        
+    
+         window.requestAnimationFrame(tick);
+    }
 
     return {
-        init:init
+        init:init,
+        tick:tick
     }
 
 });
