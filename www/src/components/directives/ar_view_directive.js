@@ -5,10 +5,11 @@ angular.module('ar-toolkit')
         restrict: 'A',
         link:function(scope, tElement, attrs){
             var elem=tElement[0];
+              ARUtils.size(elem);
             
             ARCamera.wait(function(){
-                /*AR.init(elem);
-                AR.tick();*/
+                AR.init(elem);
+                AR.tick();
             });
             
             

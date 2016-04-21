@@ -1,9 +1,13 @@
 /* Empty. Add your own CSS if you like */
-/*
+
 video{
-    display: none;
+    height: auto;
+    width: auto;
+        display: none;
 }
 
-#canvas{
-    width:100%;
-}*/
+canvas{
+    height: 100%;
+    width: 100%;
+    background-color: rebeccapurple;
+}

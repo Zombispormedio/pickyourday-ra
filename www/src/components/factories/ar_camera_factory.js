@@ -2,7 +2,7 @@ angular.module('ar-toolkit')
     .factory('ARCamera', function( ARUtils) {
 
     var video= document.getElementById('video');
-
+    ARUtils.size(video);
 
     var getMediaCapture = function(t, onsuccess, onerror) {
         var result = undefined;

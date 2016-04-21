@@ -9,7 +9,14 @@ angular.module('ar-toolkit')
 
         var geometry= new THREE.PlaneGeometry(2,2,0);
         var texture=new THREE.Texture(sourceCanvas);
-        texture.minFilter = THREE.LinearFilter;
+        texture.generateMipmaps = false;
+        texture.minFilter = THREE.NearestFilter;
+        texture.magFilter = THREE.NearestFilter;
+        texture.wrapS = texture.wrapT =THREE.ClampToEdgeWrapping;
+        
+        
+
+
         var material= new THREE.MeshBasicMaterial({
             map:texture,
             depthTest:false,
