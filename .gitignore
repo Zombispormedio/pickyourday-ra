@@ -6,3 +6,4 @@ platforms/
 plugins/
 *.log
 /www/lib/
+.brackets.json

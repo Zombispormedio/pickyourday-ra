@@ -37,27 +37,30 @@ angular.module('ar-toolkit')
         };
     }
 
-    var Scene=function(){
-        var scene=new THREE.Scene();
-        var camera=new THREE.Camera();
+    var Scene = function() {
+        var scene = new THREE.Scene();
+        var camera = new THREE.Camera();
 
-        function add(object){
+        function add(object) {
             scene.add(object);
         }
 
-        function remove(object){
+        function remove(object) {
             scene.remove(object);
         }
 
-        return{
+        function setProjectionMatrix(matrix) {
+            camera.projectionMatrix.setFromArray( matrix );
+        }
+
+        return {
             scene:scene,
             camera:camera,
             add:add,
-            remove:remove
+            remove:remove,
+            setProjectionMatrix:setProjectionMatrix,
         }
-
     }
-
 
 
     var create=function(glCanvas, dimensions, sourceCanvas){
@@ -86,6 +89,10 @@ angular.module('ar-toolkit')
         function add(object){
             virtual.add(object.model);
         }
+        
+        function setCameraMatrix( matrix ) {
+            virtual.setProjectionMatrix( matrix );
+        }
 
         function remove(object){
             virtual.remove(object.model);
@@ -96,7 +103,8 @@ angular.module('ar-toolkit')
             remove: remove,
             update: update,
             render: render,
-            glCanvas: glCanvas
+            glCanvas: glCanvas,
+            setCameraMatrix: setCameraMatrix,
         };
     }
 
