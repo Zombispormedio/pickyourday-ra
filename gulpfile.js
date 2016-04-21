@@ -5,7 +5,11 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
-var sh = require('shelljs');
+var sh = require('shelljs'),
+    sourcemaps = require('gulp-sourcemaps'),
+    uglify = require('gulp-uglify'),
+    ngAnnotate = require('gulp-ng-annotate'),
+    del = require('del');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -48,4 +52,25 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+gulp.task("clean-ra", function(cb) {
+    del(["www/dist"], cb);
+});
+
+
+gulp.task("build-js-ra", function() {
+    return gulp.src("www/src/**/*.js")
+        .pipe(sourcemaps.init())
+        .pipe(concat("pickyourday.min.js"))
+        .pipe(ngAnnotate())
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest("./www/dist"));
+});
+
+gulp.task("build-ra", ["clean-ra", "build-js-ra" ]);
+
+gulp.task("ra", function(){
+   return gulp.watch(["www/src/**/*.js"], ["build-ra"]); 
 });

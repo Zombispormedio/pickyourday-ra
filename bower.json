@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "JSARToolKit": "kig/JSARToolKit",
-	"gl-matrix": "^1.2.4"
+    "gl-matrix": "^1.2.4",
+    "three.js": "^0.75.0"
   }
 }
