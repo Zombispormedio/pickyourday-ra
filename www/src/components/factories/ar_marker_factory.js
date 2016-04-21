@@ -1,17 +1,44 @@
 angular.module('ar-toolkit')
-    .factory('ARMarker', function() {
+    .factory('ARMarker', function(ARObject) {
 
-
-    var onCreate=function(marker){
-        console.log(marker);
+    var objects={
+        16: ARObject.create({color:0xCC0000}),
+        32: ARObject.create({color:0x00CC00}),
+        64: ARObject.create({color:0x0000CC})
     }
 
-    var onUpdate=function(marker){
-        console.log(marker);
+
+    var onCreate=function(view){
+        return function(marker){
+            console.log("Created")
+            console.log(marker.id)
+         
+            var object=objects[marker.id];
+            object.transform(marker.matrix);
+            view.add(object);
+        }
+
+
     }
 
-    var onDestroy=function(marker){
-        console.log(marker);
+    var onUpdate=function(view){
+        return function(marker){
+              console.log("update")
+            console.log(marker.id)
+            
+            var object=objects[marker.id];
+            object.transform(marker.matrix);
+        }
+    }
+
+    var onDestroy=function(view){
+        return function(marker){
+              console.log("remove")
+            console.log(marker.id)
+         
+            var object=objects[marker.id];
+            view.remove(object);
+        }
     }
     return {
         onCreate:onCreate,

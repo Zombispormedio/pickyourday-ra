@@ -24,7 +24,7 @@ angular.module('ar-toolkit')
         ARCamera.copyToContext(context);
         canvas.changed=true;
 
-        detector.detect(ARMarker.onCreate, ARMarker.onUpdate, ARMarker.onDestroy);
+        detector.detect(ARMarker.onCreate(view), ARMarker.onUpdate(view), ARMarker.onDestroy(view));
         
         view.update();
         view.render();
@@ -35,8 +35,7 @@ angular.module('ar-toolkit')
 
     return {
         init:init,
-        tick:tick,
-        getView:view
+        tick:tick
     }
 
 });
