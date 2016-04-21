@@ -1,5 +1,5 @@
 angular.module('ar-toolkit')
-    .factory('AR3D', function(ARObject) {
+    .factory('AR3D', function() {
 
 
     var Reality=function(sourceCanvas){
@@ -44,7 +44,7 @@ angular.module('ar-toolkit')
         function add(object) {
          
             scene.add(object);
-               console.log(scene);
+        
             
         }
 
@@ -80,8 +80,7 @@ angular.module('ar-toolkit')
         light.lookAt(new THREE.Vector3(0,0,0));
         virtual.scene.add(light);
         
-        var obj=ARObject.create({color:0xCC0000});
-        virtual.add(obj.model);
+      
         
 
         function render(){
