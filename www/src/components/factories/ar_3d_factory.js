@@ -15,8 +15,6 @@ angular.module('ar-toolkit')
         texture.wrapS = texture.wrapT =THREE.ClampToEdgeWrapping;
 
 
-
-
         var material= new THREE.MeshBasicMaterial({
             map:texture,
             depthTest:false,
@@ -40,7 +38,7 @@ angular.module('ar-toolkit')
     var Scene = function() {
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-        
+        	camera.position.z = 5;
 
         function add(object) {
 
@@ -65,8 +63,9 @@ angular.module('ar-toolkit')
 
     var create=function(glCanvas, dimensions, sourceCanvas){
 
-        var renderer=new THREE.WebGLRenderer({canvas:glCanvas});
+        var renderer=new THREE.WebGLRenderer({canvas:glCanvas, antialias: true });
         renderer.setSize(dimensions.width, dimensions.height);
+        renderer.setPixelRatio( window.devicePixelRatio );
         renderer.autoClear=false;
 
         var reality= new Reality(sourceCanvas);
@@ -79,23 +78,8 @@ angular.module('ar-toolkit')
 
 
 
-        /*var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        var cube = new THREE.Mesh( geometry, material );
-        virtual.add( cube );
-
-        cube.position.z=-5;*/
-
-
-
-
         function render(){
             renderer.render(reality.scene, reality.camera);
-
-
-           /* cube.rotation.x += 0.1;
-            cube.rotation.y += 0.1;*/
-
 
             renderer.render(virtual.scene, virtual.camera);
 
@@ -120,7 +104,8 @@ angular.module('ar-toolkit')
             remove: remove,
             update: update,
             render: render,
-            glCanvas: glCanvas
+            glCanvas: glCanvas,
+            virtual:virtual.scene
         };
     }
 

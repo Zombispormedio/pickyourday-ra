@@ -8,44 +8,53 @@ angular.module('ar-toolkit')
     }
 
 
-    var onCreate=function(view){
-        return function(marker){
-            console.log("Created")
-            console.log(marker.id)
-         
-            var object=objects[marker.id];
+    var onCreate=function(view, marker){
+
+        console.log("Created")
+        console.log(marker.id)
+
+        var object=objects[marker.id];
 
 
-            object.rotation.x += 0.1;
-            object.rotation.y += 0.1;
-            view.add(object);
-        }
+        object.rotation.x += 0.1;
+        object.rotation.y += 0.1;
+        view.add(object);
+
 
 
     }
 
-    var onUpdate=function(view){
-        return function(marker){
-              console.log("update")
-            console.log(marker.id)
-            
-            var object=objects[marker.id];
+    var onUpdate=function(view, marker){
 
-            object.rotation.x += 0.1;
-            object.rotation.y += 0.1;
+        console.log("update")
+        console.log(marker.id)
+
+        var object=objects[marker.id];
+
+        object.rotation.x += 0.1;
+        object.rotation.y += 0.1;
+
+    }
+
+    var onDestroy=function(view, marker){
+
+        console.log("remove")
+        console.log(marker.id)
+
+        var object=objects[marker.id];
+        view.remove(object);
+
+    }
+
+    var Primitive=function(view, cb){
+        console.log(cb)
+        return function(marker){
+            cb(view, marker);
         }
     }
 
-    var onDestroy=function(view){
-        return function(marker){
-              console.log("remove")
-            console.log(marker.id)
-         
-            var object=objects[marker.id];
-            view.remove(object);
-        }
-    }
     return {
+        Primitive:Primitive,
         onCreate:onCreate,
         onUpdate:onUpdate,
         onDestroy:onDestroy
