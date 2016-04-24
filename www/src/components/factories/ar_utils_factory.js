@@ -1,15 +1,16 @@
 angular.module('ar-toolkit')
     .factory('ARUtils', function($ionicPlatform) {
 
-    return {
-        size:function(elem){
+    var size=function(elem){
             elem.width=window.innerWidth;
             elem.height=window.innerHeight;
+        }
+    return {
+        size:size, 
+        setVideoSize:function(){
 
-            $ionicPlatform.ready(function() {
-                elem.width=window.innerWidth;
-                elem.height=window.innerHeight;
-            });
+            size(document.getElementById('video'));
+
         }
     }
 });

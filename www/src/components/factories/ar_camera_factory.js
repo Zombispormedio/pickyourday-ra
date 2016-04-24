@@ -1,9 +1,8 @@
 angular.module('ar-toolkit')
-    .factory('ARCamera', function( ARUtils) {
+    .factory('ARCamera', function( ARUtils, $ionicPlatform) {
 
     var video= document.getElementById('video');
-    ARUtils.size(video);
-
+ 
     var getMediaCapture = function(t, onsuccess, onerror) {
         var result = undefined;
         if (navigator.getUserMedia) {

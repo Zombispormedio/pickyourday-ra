@@ -6,7 +6,7 @@ angular.module('ar-toolkit')
 
         canvas=document.createElement("canvas");
         var cameraDimensions=ARCamera.getDimensions();
-        console.log(cameraDimensions)
+  
         canvas.width = cameraDimensions.width;
         canvas.height = cameraDimensions.height;
 
@@ -24,7 +24,7 @@ angular.module('ar-toolkit')
         ARCamera.copyToContext(context);
         canvas.changed=true;
 
-        detector.detect(ARMarker.onCreate(view), ARMarker.onUpdate(view), ARMarker.onDestroy(view));
+       // detector.detect(ARMarker.onCreate(view), ARMarker.onUpdate(view), ARMarker.onDestroy(view));
         
         view.update();
         view.render();

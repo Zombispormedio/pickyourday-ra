@@ -13,8 +13,8 @@ angular.module('ar-toolkit')
         texture.minFilter = THREE.NearestFilter;
         texture.magFilter = THREE.NearestFilter;
         texture.wrapS = texture.wrapT =THREE.ClampToEdgeWrapping;
-        
-        
+
+
 
 
         var material= new THREE.MeshBasicMaterial({
@@ -39,13 +39,13 @@ angular.module('ar-toolkit')
 
     var Scene = function() {
         var scene = new THREE.Scene();
-        var camera = new THREE.Camera();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
         function add(object) {
-         
+
             scene.add(object);
-        
-            
+
+
         }
 
         function remove(object) {
@@ -79,29 +79,45 @@ angular.module('ar-toolkit')
         light.position.set(0,0,9000);
         light.lookAt(new THREE.Vector3(0,0,0));
         virtual.scene.add(light);
-        
-      
-        
+
+
+
+        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        var cube = new THREE.Mesh( geometry, material );
+        virtual.add( cube );
+
+        cube.position.z=-5;
+
+
+
 
         function render(){
             renderer.render(reality.scene, reality.camera);
+
+
+            cube.rotation.x += 0.1;
+            cube.rotation.y += 0.1;
+
+
             renderer.render(virtual.scene, virtual.camera);
+
         }
 
         function update(){
-            reality.update();
+             reality.update();
         }
 
         function add(object){
-            virtual.add(object.model);
+              virtual.add(object.model);
         }
-        
+
         function setCameraMatrix( matrix ) {
-            virtual.setProjectionMatrix( matrix );
+            //virtual.setProjectionMatrix( matrix );
         }
 
         function remove(object){
-            virtual.remove(object.model);
+             virtual.remove(object.model);
         }
 
         return {

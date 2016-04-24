@@ -14,6 +14,7 @@ angular.module('ar-toolkit')
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+    
   });
     
     

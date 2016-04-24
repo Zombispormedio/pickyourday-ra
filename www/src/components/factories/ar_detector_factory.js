@@ -92,7 +92,6 @@ angular.module('ar-toolkit')
 
 
 
-
         return {
              detect: detect,
             getCameraMatrix: getCameraMatrix

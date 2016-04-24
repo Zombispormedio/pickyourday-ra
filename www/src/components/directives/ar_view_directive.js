@@ -1,18 +1,26 @@
 angular.module('ar-toolkit')
-    .directive('arView', function(ARUtils, ARCamera, AR) {
+    .directive('arView', function(ARUtils, ARCamera, AR, $ionicPlatform) {
 
     return {
         restrict: 'A',
         link:function(scope, tElement, attrs){
             var elem=tElement[0];
-              ARUtils.size(elem);
-            
-            ARCamera.wait(function(){
-                AR.init(elem);
-                AR.tick();
+            $ionicPlatform.ready(function() {
+                ARUtils.size(elem);
+                ARUtils. setVideoSize();
+                ARCamera.wait(function(){
+                    AR.init(elem);
+                    AR.tick();
+                });
+
             });
-            
-            
+
+
+
+
+
+
+
         }
     };
 
