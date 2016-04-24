@@ -106,13 +106,13 @@ angular.module('ar-toolkit')
         }
 
         function add(object){
-              virtual.add(object.model);
+              virtual.add(object);
         }
 
       
 
         function remove(object){
-             virtual.remove(object.model);
+             virtual.remove(object);
         }
 
         return {

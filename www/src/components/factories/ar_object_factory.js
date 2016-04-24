@@ -7,7 +7,7 @@ angular.module('ar-toolkit')
         return model;
     }
 
-    function createMarkerMesh(color) {
+    function createCube(color) {
         var geometry = new THREE.BoxGeometry( 1, 1, 1 );
         var material = new THREE.MeshBasicMaterial( { color: color} );
         var cube = new THREE.Mesh( geometry, material );
@@ -17,13 +17,7 @@ angular.module('ar-toolkit')
 
     function createMarkerObject(params) {
 
-        var modelMesh = createMarkerMesh(params.color);
-           
-
-        return {
-           
-            model: modelMesh
-        }
+        return createCube(params.color);
     }
 
 
