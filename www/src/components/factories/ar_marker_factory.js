@@ -14,7 +14,11 @@ angular.module('ar-toolkit')
             console.log(marker.id)
          
             var object=objects[marker.id];
-            object.transform(marker.matrix);
+            //object.transform(marker.matrix);
+            console.log(object)
+            var model=object.model;
+           model.rotation.x += 0.1;
+            model.rotation.y += 0.1;
             view.add(object);
         }
 
@@ -27,7 +31,10 @@ angular.module('ar-toolkit')
             console.log(marker.id)
             
             var object=objects[marker.id];
-            object.transform(marker.matrix);
+            //object.transform(marker.matrix);
+             var model=object.model;
+           model.rotation.x += 0.1;
+            model.rotation.y += 0.1;
         }
     }
 

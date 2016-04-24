@@ -15,8 +15,9 @@ angular.module('ar-toolkit')
         detector=ARDetector.create(canvas);
 
         view=AR3D.create(glCanvas, cameraDimensions, canvas);
+        console.log(detector.getCameraMatrix(10,1000))
 
-        view.setCameraMatrix( detector.getCameraMatrix(10,1000) );
+   
 
     }
 
@@ -24,7 +25,7 @@ angular.module('ar-toolkit')
         ARCamera.copyToContext(context);
         canvas.changed=true;
 
-       // detector.detect(ARMarker.onCreate(view), ARMarker.onUpdate(view), ARMarker.onDestroy(view));
+        detector.detect(ARMarker.onCreate(view), ARMarker.onUpdate(view), ARMarker.onDestroy(view));
         
         view.update();
         view.render();

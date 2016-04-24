@@ -40,6 +40,7 @@ angular.module('ar-toolkit')
     var Scene = function() {
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+        
 
         function add(object) {
 
@@ -52,16 +53,12 @@ angular.module('ar-toolkit')
             scene.remove(object);
         }
 
-        function setProjectionMatrix(matrix) {
-            camera.projectionMatrix.setFromArray( matrix );
-        }
-
+     
         return {
             scene:scene,
             camera:camera,
             add:add,
-            remove:remove,
-            setProjectionMatrix:setProjectionMatrix,
+            remove:remove
         }
     }
 
@@ -82,12 +79,12 @@ angular.module('ar-toolkit')
 
 
 
-        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        /*var geometry = new THREE.BoxGeometry( 1, 1, 1 );
         var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         var cube = new THREE.Mesh( geometry, material );
         virtual.add( cube );
 
-        cube.position.z=-5;
+        cube.position.z=-5;*/
 
 
 
@@ -96,8 +93,8 @@ angular.module('ar-toolkit')
             renderer.render(reality.scene, reality.camera);
 
 
-            cube.rotation.x += 0.1;
-            cube.rotation.y += 0.1;
+           /* cube.rotation.x += 0.1;
+            cube.rotation.y += 0.1;*/
 
 
             renderer.render(virtual.scene, virtual.camera);
@@ -112,9 +109,7 @@ angular.module('ar-toolkit')
               virtual.add(object.model);
         }
 
-        function setCameraMatrix( matrix ) {
-            //virtual.setProjectionMatrix( matrix );
-        }
+      
 
         function remove(object){
              virtual.remove(object.model);
@@ -125,8 +120,7 @@ angular.module('ar-toolkit')
             remove: remove,
             update: update,
             render: render,
-            glCanvas: glCanvas,
-            setCameraMatrix: setCameraMatrix,
+            glCanvas: glCanvas
         };
     }
 
