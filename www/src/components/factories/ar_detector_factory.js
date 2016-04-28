@@ -1,4 +1,4 @@
-angular.module('ar-toolkit')
+angular.module('artoolkit')
     .factory('ARDetector', function() {
 
     function create(sourceCanvas){

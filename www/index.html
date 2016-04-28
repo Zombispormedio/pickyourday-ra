@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="artoolkit">
 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">-->
-       
+
 
         <link href="lib/ionic/css/ionic.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet">
-
         <!-- ionic/angularjs js -->
+
         <script src="lib/ionic/js/ionic.bundle.js"></script>
 
         <!-- cordova script (this will be a 404 during development) -->
-        <script src="cordova.js"></script>
+        <script  src="cordova.js"></script>
 
-        <!-- your app's js -->
 
-        <script defer src="lib/JSARToolKit/JSARToolKit.min.js"></script>
-        <script defer src="lib/three.js/three.min.js"></script>
-        <!-- your app's js -->
-        <script defer src="dist/pickyourday.min.js"></script>
+        <script  src="lib/async/lib/async.js"></script>
+        <script  src="lib/JSARToolKit/JSARToolKit.min.js"></script>
+        <script src="lib/three.js/three.min.js"></script>
 
+
+
+        <script src="lib/angular-resource/angular-resource.min.js"></script>
+
+        <script src="dist/pickyourday.min.js"></script>
 
     </head>
 
-    <body ng-app="ar-toolkit" ng-controller="ARController">
-     
-        <canvas id="canvas"  ar-view actions="actions"></canvas>
-        <video id="video"></video>
-        	
-			
-        
+    <body ui-view >
+
     </body>
 
 </html>

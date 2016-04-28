@@ -1,4 +1,4 @@
-angular.module('ar-toolkit')
+angular.module('artoolkit')
     .directive('arView', function(ARUtils, ARCamera, AR, $ionicPlatform) {
 
     return {

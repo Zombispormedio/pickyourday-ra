@@ -1,4 +1,4 @@
-angular.module('ar-toolkit')
+angular.module('artoolkit')
     .factory('ARMarker', function(ARObject) {
 
     var objects={

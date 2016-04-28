@@ -1,4 +1,4 @@
-angular.module('ar-toolkit')
+angular.module('artoolkit')
     .factory('AR', function(ARCamera, ARDetector, AR3D, ARMarker) {
 
     var canvas, context, detector, view, actions;

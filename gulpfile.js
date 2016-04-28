@@ -9,7 +9,8 @@ var sh = require('shelljs'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
     ngAnnotate = require('gulp-ng-annotate'),
-    del = require('del');
+    del = require('del'),
+	    ngHtml2Js = require("gulp-ng-html2js");
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -57,6 +58,23 @@ gulp.task('git-check', function(done) {
 gulp.task("clean-ra", function(cb) {
     del(["www/dist"], cb);
 });
+
+
+
+
+gulp.task("clean-ra", function(cb) {
+    del(['www/dist/pickyourday.min.js'/*,'www/src/template-cache.js'*/ ], cb);
+});
+
+
+
+gulp.task("template-cache-ra", function(){
+    return gulp.src("www/src/views/**/*.html")
+    .pipe(ngHtml2Js({moduleName:"artoolkit", prefix:"/views/"}))
+    .pipe(concat("template-cache.js"))
+    .pipe(gulp.dest("./www/src"));
+});
+
 
 
 gulp.task("build-js-ra", function() {

@@ -1,4 +1,4 @@
-angular.module('ar-toolkit')
+angular.module('artoolkit')
     .factory('ARCamera', function( ARUtils, $ionicPlatform) {
 
     var video= document.getElementById('video');

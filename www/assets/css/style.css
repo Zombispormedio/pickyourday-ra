@@ -11,3 +11,17 @@ canvas{
     width: 100%;
     background-color: rebeccapurple;
 }
+
+.bar.bar-positive {
+    border-color: #004D40;
+    background-color: #009688;
+    background-image: linear-gradient(0deg, #004D40, #004D40 50%, transparent 50%);
+    color: #fff;
+}
+
+.button.button-positive{
+        background-color: #009688;
+}
+.button.button-positive.activated{
+        background-color: #004D40;
+}

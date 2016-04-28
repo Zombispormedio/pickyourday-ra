@@ -1,4 +1,4 @@
-angular.module('ar-toolkit')
+angular.module('artoolkit')
     .factory('ARUtils', function($ionicPlatform) {
 
     var size=function(elem){

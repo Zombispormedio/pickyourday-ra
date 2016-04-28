@@ -1,5 +1,5 @@
-angular.module('ar-toolkit')
-    .controller('ARController', function($scope, ARObject) {
+angular.module('artoolkit')
+    .controller('ARCtrl', function($scope, ARObject) {
 
 
     var object= ARObject.createIcosahedron();
