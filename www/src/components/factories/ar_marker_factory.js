@@ -44,7 +44,6 @@ angular.module('artoolkit')
     }
 
     var Primitive=function(view, cb){
-        console.log(cb)
         return function(marker){
             cb(view, marker);
         }
