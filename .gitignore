@@ -4,6 +4,7 @@
 node_modules/
 platforms/
 plugins/
+
 *.log
 /www/lib/
 .brackets.json
