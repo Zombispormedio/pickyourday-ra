@@ -29,7 +29,7 @@ angular.module('artoolkit')
         ARCamera.copyToContext(context);
         canvas.changed=true;
 
-       // detector.detect(actions.onCreate, actions.onUpdate, actions.onDestroy);
+        detector.detect(actions.onCreate, actions.onUpdate, actions.onDestroy);
 
         view.update();
         view.render();
