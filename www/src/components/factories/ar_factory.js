@@ -1,11 +1,13 @@
 angular.module('artoolkit')
     .factory('AR', function(ARCamera, ARDetector, AR3D, ARMarker) {
 
-    var canvas, context, detector, view, actions;
-    var init=function(glCanvas, marker_actions){
+    var canvas, context, detector, view, actions, update;
+    var init=function(glCanvas, marker_actions, onInit, onUpdate){
 
         marker_actions=marker_actions ||{}
         actions={}; 
+        
+        update=onUpdate;
 
         canvas=document.createElement("canvas");
         var cameraDimensions=ARCamera.getDimensions();
@@ -22,6 +24,8 @@ angular.module('artoolkit')
         actions.onCreate=ARMarker.Primitive(view, marker_actions.onCreate||ARMarker.onCreate);
         actions.onUpdate=ARMarker.Primitive(view, marker_actions.onUpdate||ARMarker.onUpdate);
         actions.onDestroy=ARMarker.Primitive(view, marker_actions.onDestroy||ARMarker.onDestroy);
+        
+        if(onInit)onInit(view);
 
     }
 
@@ -32,6 +36,9 @@ angular.module('artoolkit')
         detector.detect(actions.onCreate, actions.onUpdate, actions.onDestroy);
 
         view.update();
+        
+        if(update)update();
+        
         view.render();
 
 
@@ -40,7 +47,8 @@ angular.module('artoolkit')
 
     return {
         init:init,
-        tick:tick
+        tick:tick,
+        view:view
     }
 
 });

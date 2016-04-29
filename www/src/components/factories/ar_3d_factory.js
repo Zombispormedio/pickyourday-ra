@@ -37,8 +37,12 @@ angular.module('artoolkit')
 
     var Scene = function() {
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-        	camera.position.z = 5;
+        /*var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+        	camera.position.z = 5;*/
+        
+       var  camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.set( -5, -5, 5 );
+				camera.up.set( 0, 0, 1 );
 
         function add(object) {
 
@@ -51,7 +55,7 @@ angular.module('artoolkit')
             scene.remove(object);
         }
 
-     
+
         return {
             scene:scene,
             camera:camera,
@@ -71,14 +75,15 @@ angular.module('artoolkit')
         var reality= new Reality(sourceCanvas);
         var virtual= new Scene();
 
-        var light=new THREE.SpotLight(0xffffff);
-        light.position.set(0,0,9000);
-        light.lookAt(new THREE.Vector3(0,0,0));
+
+        var light = new THREE.DirectionalLight( 0xffffff, 1.5 );
+        light.position.set( 0, -4, -4 ).normalize();
         virtual.scene.add(light);
 
 
 
         function render(){
+            renderer.clear();
             renderer.render(reality.scene, reality.camera);
 
             renderer.render(virtual.scene, virtual.camera);
@@ -86,17 +91,17 @@ angular.module('artoolkit')
         }
 
         function update(){
-             reality.update();
+            reality.update();
         }
 
         function add(object){
-              virtual.add(object);
+            virtual.add(object);
         }
 
-      
+
 
         function remove(object){
-             virtual.remove(object);
+            virtual.remove(object);
         }
 
         return {
@@ -105,7 +110,8 @@ angular.module('artoolkit')
             update: update,
             render: render,
             glCanvas: glCanvas,
-            virtual:virtual.scene
+            virtual:virtual.scene,
+            camera:virtual.camera
         };
     }
 
