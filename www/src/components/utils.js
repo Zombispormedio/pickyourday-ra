@@ -78,3 +78,7 @@ function generate(fn) {
         return Array.apply(0, Array(count)).map(fn);
     };
 }
+
+function degInRad(deg) {
+    return deg * Math.PI / 180;
+}

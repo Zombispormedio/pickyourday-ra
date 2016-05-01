@@ -40,10 +40,10 @@ angular.module('artoolkit')
         /*var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
         	camera.position.z = 5;*/
         
-       var  camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 10000 );
-				camera.position.set( -5, -5, 5 );
-				camera.up.set( 0, 0, 1 );
-
+       var  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.set( 0, -50, 500 );
+          
+      
         function add(object) {
 
             scene.add(object);
@@ -75,9 +75,9 @@ angular.module('artoolkit')
         var reality= new Reality(sourceCanvas);
         var virtual= new Scene();
 
-
-        var light = new THREE.DirectionalLight( 0xffffff, 1.5 );
-        light.position.set( 0, -4, -4 ).normalize();
+       
+        var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        light.position.set( -5, -5, 10000 ).normalize();
         virtual.scene.add(light);
 
 

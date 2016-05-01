@@ -32,8 +32,9 @@ angular.module('artoolkit')
     $scope.onInit=function(view){
         var loader = new THREE.ColladaLoader();
        
-        loader.load( "./assets/models/collada/avatar.dae", function ( collada ) {
-
+        loader.load( "./assets/models/collada/saludo.dae", function ( collada ) {
+            console.log(collada);
+            collada.scene.rotation.x=degInRad(-90);
             collada.scene.traverse( function ( child ) {
 
                 if ( child instanceof THREE.SkinnedMesh ) {
