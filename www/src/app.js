@@ -1,4 +1,4 @@
-var app=angular.module('artoolkit', ['ionic', 'ngResource'])
+var app=angular.module('artoolkit', ['ionic', 'ngResource', 'ngWebworker'])
 
 
           

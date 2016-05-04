@@ -4,12 +4,12 @@
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.3.0"
   },
-
   "dependencies": {
     "JSARToolKit": "kig/JSARToolKit",
     "gl-matrix": "^1.2.4",
     "three.js": "^0.75.0",
-    "async": "^1.5.2"
+    "async": "^1.5.2",
+    "ng-webworker": "^0.2.3"
   },
   "resolutions": {
     "angular": "1.5.5"

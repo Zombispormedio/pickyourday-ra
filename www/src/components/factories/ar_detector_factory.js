@@ -70,11 +70,13 @@ angular.module('artoolkit')
                 if( marker === undefined ) {
                     marker = newMarker(id, getTransformMatrix(index));
                     markers[id] = marker;
+                    if(onCreate)
                     onCreate( marker );
                 }
                 else {
                     marker.matrix = getTransformMatrix(index);
                     marker.age = persistTime;
+                     if(onUpdate)
                     onUpdate( marker );
                 }
             }
@@ -83,6 +85,7 @@ angular.module('artoolkit')
                 var marker = markers[id];
                 if( marker ) {
                     if( marker.age-- == 0 ) {
+                        if(onDestroy)
                         onDestroy( marker );
                         delete markers[id];
                     }
