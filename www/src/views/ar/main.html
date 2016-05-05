@@ -6,11 +6,14 @@
 
 <script id="modal.html" type="text/ng-template">
   <ion-modal-view on-swipe-down="closeModal()">
-    <ion-header-bar>
-      <h1 class="title">My Modal title</h1>
+    <ion-header-bar  align-title="center" class="bar-positive">
+      <h1 class="title">Congratulations!!!</h1>
     </ion-header-bar>
-    <ion-content>
-      Hello!
+    <ion-content scroll="false" style="font-size: 4.5em;
+    text-align: center;
+    height: 100%;
+    line-height: 2;">
+      {{message || 'You Win This Time'}}
     </ion-content>
   </ion-modal-view>
 </script>

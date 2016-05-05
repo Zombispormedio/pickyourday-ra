@@ -13,14 +13,15 @@ angular.module('artoolkit')
     }
 
     var starting=false;
+    var default_duration=10;
 
     var clock = new THREE.Clock();
 
     $scope.onUpdate=function(){
         THREE.AnimationHandler.update( clock.getDelta() );
     }
-    
- 
+
+
 
 
 
@@ -28,8 +29,8 @@ angular.module('artoolkit')
     $scope.actions={
 
         onCreate:function(view, marker){
-     
-         
+
+
             if(!starting){
                 starting=true;
                 showLoading();
@@ -49,8 +50,8 @@ angular.module('artoolkit')
             function(next){
                 CustomerService.AR().collada({marker_id:id}, function(res){
                     var data=res.data;
-                
-                    next(null,{url:data.collada, message:data.collada});
+
+                    next(null,{url:data.collada, message:data.message, duration:data.duration});
                 })
             }, function(worker, next){
 
@@ -88,16 +89,26 @@ angular.module('artoolkit')
 
 
         ], function(_, result){
-
-            $timeout(function(){
-               
-                result.animation.stop();
-                view.remove(result.scene);
-                openModal();
-            }, 10000)
-
-            hideLoading();
+            onFinished(result, view);
         });
+    }
+
+
+
+
+    var onFinished=function(result, view){
+        $scope.message=result.message;
+        
+        var duration=(result.duration||default_duration)*1000;
+
+        $timeout(function(){
+
+            result.animation.stop();
+            view.remove(result.scene);
+            openModal();
+        }, duration)
+
+        hideLoading();
     }
 
 
@@ -109,7 +120,7 @@ angular.module('artoolkit')
     });
 
     var openModal = function() {
-          $rootScope.onModal=true;
+        $rootScope.onModal=true;
         $scope.modal.show();
     };
     $scope.closeModal = function() {
@@ -117,7 +128,7 @@ angular.module('artoolkit')
         starting=false;
         $scope.modal.hide();
     };
-    // Cleanup the modal when we're done with it!
+
     $scope.$on('$destroy', function() {
         $scope.modal.remove();
     });
