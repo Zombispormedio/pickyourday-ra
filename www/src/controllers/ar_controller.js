@@ -1,5 +1,5 @@
 angular.module('artoolkit')
-    .controller('ARCtrl', function($scope, ARObject, $ionicLoading, CustomerService, $timeout) {
+    .controller('ARCtrl', function($rootScope, $scope, ARObject, $ionicLoading, CustomerService, $timeout, $ionicModal) {
 
     var loader = new THREE.ColladaLoader();
     var showLoading=function(){
@@ -20,14 +20,16 @@ angular.module('artoolkit')
         THREE.AnimationHandler.update( clock.getDelta() );
     }
     
-   
+ 
+
+
 
 
     $scope.actions={
 
         onCreate:function(view, marker){
-            console.log("create")
-            console.log(starting)
+     
+         
             if(!starting){
                 starting=true;
                 showLoading();
@@ -39,30 +41,31 @@ angular.module('artoolkit')
 
 
     }
-    
-    
-   
+
+
+
     var startCollada=function(id, view){
         async.waterfall([
             function(next){
                 CustomerService.AR().collada({marker_id:id}, function(res){
-
-                    next(null, res.data.collada);
+                    var data=res.data;
+                
+                    next(null,{url:data.collada, message:data.collada});
                 })
-            }, function(url, next){
-             
-                loader.load(url, function(collada){
-                  
-                    next(null, collada); 
+            }, function(worker, next){
+
+                loader.load(worker.url, function(collada){
+                    worker.collada=collada;
+                    next(null, worker); 
                 });
 
 
 
-            }, function(collada, next){
-
+            }, function(worker, next){
+                var collada=worker.collada;
                 collada.scene.rotation.x=degInRad(-90);
                 collada.scene.traverse( function ( child ) {
-                 
+
 
                     if ( child instanceof THREE.SkinnedMesh ) {
 
@@ -70,7 +73,11 @@ angular.module('artoolkit')
                         animation.play();
 
                         view.camera.lookAt( child.position );
-                        next(null, {scene:collada.scene, animation:animation});
+
+                        worker.scene=collada.scene;
+                        worker.animation=animation;
+
+                        next(null, worker);
                     }
 
                 } );
@@ -81,19 +88,54 @@ angular.module('artoolkit')
 
 
         ], function(_, result){
-            
+
             $timeout(function(){
-                console.log("stop");
+               
                 result.animation.stop();
                 view.remove(result.scene);
-                starting=false;
-            }, 1000)
-            
+                openModal();
+            }, 10000)
+
             hideLoading();
         });
     }
-    
+
+
+    $ionicModal.fromTemplateUrl('modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal = modal;
     });
+
+    var openModal = function() {
+          $rootScope.onModal=true;
+        $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+        $rootScope.onModal=false;
+        starting=false;
+        $scope.modal.hide();
+    };
+    // Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
 
 
 
